@@ -82,7 +82,7 @@
 }
 
 .intro-container {
-  margin-top: 5em;
+  margin-top: 1em;
   background-color: var(--primary-background-color);
 }
 
@@ -94,11 +94,16 @@
   margin-bottom: 40px; /* Adds spacing between sections */
 }
 
+.about-section img,
 .intro-section img {
   width: 100%; /* Makes image responsive */
   max-width: 350px; /* Limits image size */
   height: auto; /* Maintains aspect ratio */
   margin-bottom: 20px; /* Adds spacing between image and text */
+}
+
+.about-section li {
+  list-style: none;
 }
 
 .intro-section p {
@@ -116,7 +121,7 @@
   }
 
   .intro-container {
-    margin-top: 10em;
+    margin-top: 2em;
   }
 
   .intro-section {
