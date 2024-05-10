@@ -197,6 +197,47 @@ body {
   text-decoration: none;
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: white;
+  max-width: 960px;
+  margin: auto;
+  border: 1px solid var(--secondary-light-color);
+  border-radius: 10px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-info h1, .profile-info h2 {
+  margin: 0;
+}
+
+.profile-info p {
+  max-width: 600px;
+  margin-top: 10px;
+}
+
+.social-links a {
+  margin: 10px;
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.social-links a:hover {
+  text-decoration: underline;
+}
 
 /**
  * Footer CSS
@@ -246,6 +287,16 @@ body {
 
   body.hide-sidedrawer #footer {
     margin-left: 0;
+  }
+
+  .profile-container {
+    flex-direction: row;
+    align-items: start;
+}
+
+  .profile-info {
+    margin-left: 20px;
+    text-align: left;
   }
 }
 

@@ -62,8 +62,13 @@ function getHtmlFileName() {
 }
 
 window.onload = function () {
-  if (localStorage.getItem('username') && ['signin.html', 'signup.html'].includes(getHtmlFileName())) {
+  const username = localStorage.getItem('username')
+  if (username && ['signin.html', 'signup.html'].includes(getHtmlFileName())) {
     window.location.href = 'profile.html';
+  }
+
+  if (username) {
+    document.getElementById('username').textContent = username;
   }
 
   var signinFormElem = document.getElementById('signinForm');
@@ -78,6 +83,7 @@ window.onload = function () {
       let users = JSON.parse(localStorage.getItem('users')) || {};
 
       if (users[username] && users[username] === hashedPassword) {
+        localStorage.setItem('username', username);
         alert('You are successfully signed in!');
         // Redirect to a new page or update UI
         window.location.href = 'profile.html';
