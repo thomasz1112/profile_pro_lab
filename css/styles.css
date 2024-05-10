@@ -80,6 +80,7 @@ body {
    transition: transform 0.2s;
  }
 
+ #intro-content-wrapper,
  #content-wrapper {
    min-height: 100%;
    overflow-x: hidden;
@@ -110,6 +111,7 @@ body {
 
 .logo-wrapper .head-title {
   font-size: 1em;
+  margin-left: 0.4em;
 }
 
 .drawer-title-link {
