@@ -8,6 +8,7 @@
   <title>MUI Landing Page Example</title>
   <link href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <title>ProfileProLab</title>
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -37,18 +38,26 @@
   </header>
   <div id="intro-content-wrapper" class="mui--text-center">
     <div class="mui--appbar-height"></div>
-    <br>
-    <br>
-    <div class="mui--text-display3">Sign in</div>
-    <br>
-    <br>
-    <button class="mui-btn mui-btn--raised">About</button>
+    <div class="mui-container-fluid intro-container">
+      <div class="signin-container">
+        <form id="signinForm">
+          <h2>Sign In</h2>
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Sign In</button>
+          <p>Not registered? <a href="signup.html">Sign Up</a></p>
+        </form>
+      </div>
+    </div>
   </div>
   <footer>
     <div class="mui-container mui--text-center">
       Made with ♥ by <a href="https://www.muicss.com">MUICSS</a>
     </div>
   </footer>
+  <script src="js/scripts.js"></script>
 </body>
 
 </html>

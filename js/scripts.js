@@ -41,3 +41,30 @@ jQuery(function ($) {
     $(this).next().slideToggle(200);
   });
 });
+
+function getHtmlFileName() {
+  var path = window.location.pathname; // Gets the path
+  var fileName = path.substring(path.lastIndexOf('/') + 1); // Extracts file name from the path
+  return fileName;
+}
+
+window.onload = function () {
+  if (localStorage.getItem('username') && ['signin.html', 'signup.html'].includes(getHtmlFileName())) {
+    window.location.href = 'profile.html';
+  }
+
+  var signinFormElem = document.getElementById('signinForm');
+  if (signinFormElem) {
+    document.getElementById('signinForm').addEventListener('submit', function (event) {
+      console.log("sign in submit event triggered!")
+      event.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value; // In a real application, handle passwords securely
+      localStorage.setItem('username', username); // Store username in local storage
+      alert('You have successfully signed in!');
+      window.location.href = 'profile.html';
+    });
+  }
+
+
+};

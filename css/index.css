@@ -171,6 +171,51 @@
   background-color: var(--secondary-color);
 }
 
+.signin-container {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+button {
+  padding: 10px;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: var(--secondary-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 480px) {
   .pricing-card {
       width: calc(100% - 20px);
@@ -204,5 +249,9 @@
 
   .pricing-card {
     width: calc(50% - 20px);
-}
+  }
+
+  .signin-container {
+    margin: 2em auto;
+  }
 }
