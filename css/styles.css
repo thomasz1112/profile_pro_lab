@@ -5,6 +5,7 @@
   --secondary-light-color: #FFD9B0; /* Sunrise Glow */
   --accent-color: #F08617; /* Spiced Pumpkin */
   --primary-font-color: #333;
+  --primary-background-color: #fff;
 }
 
 .nav-wrapper, .mui-appbar {
