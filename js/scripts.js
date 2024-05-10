@@ -68,14 +68,56 @@ window.onload = function () {
 
   var signinFormElem = document.getElementById('signinForm');
   if (signinFormElem) {
-    document.getElementById('signinForm').addEventListener('submit', function (event) {
-      console.log("sign in submit event triggered!")
+    signinFormElem.addEventListener('submit', function (event) {
       event.preventDefault();
+
       const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value; // In a real application, handle passwords securely
-      localStorage.setItem('username', username); // Store username in local storage
-      alert('You have successfully signed in!');
-      window.location.href = 'profile.html';
+      const password = document.getElementById('password').value;
+      const hashedPassword = btoa(password); // Same simple "encryption" for demonstration
+
+      let users = JSON.parse(localStorage.getItem('users')) || {};
+
+      if (users[username] && users[username] === hashedPassword) {
+        alert('You are successfully signed in!');
+        // Redirect to a new page or update UI
+        window.location.href = 'profile.html';
+      } else {
+        alert('Invalid username or password.');
+      }
+    });
+  }
+  var signupFormElem = document.getElementById('signupForm');
+  if (signupFormElem) {
+    signupFormElem.addEventListener('submit', function (event) {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('password-confirm').value;
+
+      if (password !== passwordConfirm) {
+        alert('Passwords do not match. Please try again.');
+        return;
+      }
+
+      // Assume some basic encryption or hashing (not actually secure, just for demonstration)
+      const hashedPassword = btoa(password); // Using Base64 just for the example
+
+      // Check if users data already exists
+      let users = JSON.parse(localStorage.getItem('users')) || {};
+      if (users[username]) {
+        alert('Username already exists. Please use a different username.');
+        return;
+      }
+
+      // Save new user data
+      users[username] = hashedPassword;
+      localStorage.setItem('users', JSON.stringify(users));
+
+      alert('You have successfully signed up!');
+      // Redirect or clear form
+      this.reset();
+      window.location.href = 'signin.html';
     });
   }
 };
