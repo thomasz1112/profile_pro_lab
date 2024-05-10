@@ -1,0 +1,257 @@
+:root {
+  --primary-color: #FFB05D; /* Vibrant Tangerine */
+  --primary-dark-color: #572D00; /* Espresso Dark */
+  --secondary-color: #A95700; /* Burnt Amber */
+  --secondary-light-color: #FFD9B0; /* Sunrise Glow */
+  --accent-color: #F08617; /* Spiced Pumpkin */
+}
+
+.nav-wrapper, .mui-appbar {
+  background-color: var(--primary-color);
+}
+
+.btn, .btn-large, .btn-small, .btn-floating {
+  background-color: var(--primary-color);
+}
+
+.btn:hover, .btn-large:hover, .btn-small:hover, .btn-floating:hover {
+  background-color: var(--primary-dark-color);
+}
+
+.card-panel {
+  background-color: var(--secondary-light-color);
+}
+
+.collection-item.active, .collection-item:hover {
+  background-color: var(--secondary-color);
+}
+
+/**
+ * Body CSS
+ */
+ html,
+ body {
+   height: 100%;
+   background-color: #eee;
+ }
+
+ /* Base styles: Apply to all devices by default */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  background-color: #fff;
+}
+
+ html,
+ body,
+ input,
+ textarea,
+ button {
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+ }
+
+
+ /**
+  * Layout CSS
+  */
+ #header {
+   position: fixed;
+   top: 0;
+   right: 0;
+   left: 0;
+   z-index: 2;
+   transition: left 0.2s;
+ }
+
+ #sidedrawer {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   width: 200px;
+   left: -200px;
+   overflow: auto;
+   z-index: 2;
+   background-color: #fff;
+   transition: transform 0.2s;
+ }
+
+ #content-wrapper {
+   min-height: 100%;
+   overflow-x: hidden;
+   margin-left: 0px;
+   transition: margin-left 0.2s;
+
+   /* sticky bottom */
+   margin-bottom: -160px;
+   padding-bottom: 160px;
+ }
+
+ #footer {
+   height: 160px;
+   margin-left: 0px;
+   transition: margin-left 0.2s;
+ }
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #fff;
+}
+
+.logo-wrapper:hover {
+  text-decoration: none;
+}
+
+.logo-wrapper .head-title {
+  font-size: 1.5em;
+}
+
+/**
+ * Toggle Side drawer
+ */
+ #sidedrawer.active {
+  transform: translate(200px);
+}
+
+/**
+ * Side drawer CSS
+ */
+ #sidedrawer-brand {
+  padding-left: 20px;
+}
+
+#sidedrawer ul {
+  list-style: none;
+}
+
+#sidedrawer > ul {
+  padding-left: 0px;
+}
+
+#sidedrawer > ul > li:first-child {
+  padding-top: 15px;
+}
+
+#sidedrawer strong {
+  display: block;
+  padding: 15px 22px;
+  cursor: pointer;
+}
+
+#sidedrawer strong:hover {
+  background-color: #E0E0E0;
+}
+
+#sidedrawer strong + ul > li {
+  padding: 6px 0px;
+}
+
+/**
+ * Header CSS
+ */
+.sidedrawer-toggle {
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  line-height: 20px;
+  margin-right: 10px;
+}
+
+.sidedrawer-toggle:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+/**
+ * Footer CSS
+ */
+#footer {
+  background-color: #0288D1;
+  color: #fff;
+}
+
+#footer a {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Small devices (phones, less than 768px) */
+/* No query for this since it's the default size in mobile-first design */
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #header {
+    left: 200px;
+  }
+
+  #sidedrawer {
+    transform: translate(200px);
+  }
+
+  #content-wrapper {
+    margin-left: 200px;
+  }
+
+  #footer {
+    margin-left: 200px;
+  }
+
+  body.hide-sidedrawer #header {
+    left: 0;
+  }
+
+  body.hide-sidedrawer #sidedrawer {
+    transform: translate(0px);
+  }
+
+  body.hide-sidedrawer #content-wrapper {
+    margin-left: 0;
+  }
+
+  body.hide-sidedrawer #footer {
+    margin-left: 0;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .column {
+      width: 33.33%;
+  }
+
+  nav {
+      float: right;
+      width: 300px;
+  }
+
+  article {
+      margin-left: 320px; /* Same as nav width if nav is sidebar */
+  }
+}
+
+@media screen and (min-width: 993px) {
+
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container {
+      width: 1170px;
+      margin: auto;
+  }
+
+  header, nav, footer {
+      padding: 20px;
+  }
+
+  section {
+      padding: 30px;
+  }
+}
