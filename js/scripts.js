@@ -40,6 +40,19 @@ jQuery(function ($) {
   $titleEls.on('click', function () {
     $(this).next().slideToggle(200);
   });
+
+  $('#signOutLink').click(function (event) {
+    event.preventDefault(); // Prevent the default action
+
+    // Clear user data from local storage
+    localStorage.removeItem('username'); // Adjust this key if you store something else for the session
+
+    // Optionally alert the user
+    alert('You have successfully signed out.');
+
+    // Redirect to another page, like the sign-in page
+    window.location.href = 'signin.html';
+  });
 });
 
 function getHtmlFileName() {
@@ -65,6 +78,4 @@ window.onload = function () {
       window.location.href = 'profile.html';
     });
   }
-
-
 };
