@@ -83,7 +83,34 @@ window.onload = async function () {
     appendPosts(['post_1.txt'], 'pinned-posts');
     appendPosts(['post_6.txt', 'post_5.txt', 'post_4.txt'], 'recent-posts');
   }
+
+  if (currentPage == 'post_detail.html') {
+    showPostDetail();
+  }
 };
+
+function showPostDetail() {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const postId = urlParams.get('postId');
+
+  const postData = JSON.parse(localStorage.getItem(postId));
+  var postDetailContainer = document.getElementById('post-detail-container');
+  postDetailContainer.innerHTML = '';
+  console.log(postDetailContainer)
+
+  var postHtml = `
+        <div id="post">
+            <br>
+            <div class="mui--text-headline">${postData.title}</div>
+            <div class="mui--text-dark-secondary">By <a class="username" href="#">${postData.author}</a> ${postData.date}</div>
+            <div>
+                ${postData.htmlContent}
+            </div>
+        </div>
+    `;
+  postDetailContainer.insertAdjacentHTML('beforeend', postHtml)
+}
 
 function getHtmlFileName() {
   var path = window.location.pathname; // Gets the path
