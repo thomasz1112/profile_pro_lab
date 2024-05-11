@@ -108,7 +108,31 @@ window.onload = async function () {
       lightbox.style.display = 'none'; // Hide the lightbox on click
     });
   }
+
+  if (currentPage == 'resumes.html') {
+    await showResumes();
+  }
 };
+
+async function showResumes() {
+  const resumeNames = ['web_development.txt', 'app_development.txt'];
+  const container = document.getElementById('resumes');
+  container.innerHTML = '';
+  resumeNames.forEach(async (rn) => {
+    const resumeData = await fetch(`./resumes/${rn}`).then(response => response.text())
+    const converter = new showdown.Converter();
+    const htmlContent = converter.makeHtml(resumeData);
+
+    const resumeHtml = `
+        <div id="resume">
+            ${htmlContent}
+        </div>
+        <div class="mui-divider"></div>
+    `;
+    container.insertAdjacentHTML('beforeend', resumeHtml)
+
+  })
+}
 
 function showPostDetail() {
   const queryString = window.location.search;
