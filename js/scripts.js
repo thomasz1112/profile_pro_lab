@@ -55,7 +55,7 @@ jQuery(function ($) {
   });
 });
 
-window.onload = function () {
+window.onload = async function () {
   const username = localStorage.getItem('username');
   const currentPage = getHtmlFileName();
   if (username && ['signin.html', 'signup.html'].includes(currentPage)) {
@@ -79,7 +79,9 @@ window.onload = function () {
   }
 
   if (currentPage == 'profile.html') {
-    cachePostsToLocal()
+    await cachePostsToLocal();
+    appendPosts(['post_1.txt'], 'pinned-posts');
+    appendPosts(['post_6.txt', 'post_5.txt', 'post_4.txt'], 'recent-posts');
   }
 };
 
@@ -87,6 +89,26 @@ function getHtmlFileName() {
   var path = window.location.pathname; // Gets the path
   var fileName = path.substring(path.lastIndexOf('/') + 1); // Extracts file name from the path
   return fileName;
+}
+
+function appendPosts(postIds, postsContainerId) {
+  const postsContainer = document.getElementById(postsContainerId);
+  postsContainer.innerHTML = '';
+  postIds.forEach((id) => {
+    const postData = JSON.parse(localStorage.getItem(id));
+    const postHtml = `
+        <div id="post">
+            <br>
+            <div class="mui--text-headline">${postData.title}</div>
+            <div class="mui--text-dark-secondary">By <a class="username" href="#">${postData.author}</a> ${postData.date}</div>
+            <div>
+                ${postData.firstParagraph}
+                <a href="post_detail.html?postId=${id}">Read more...</a>
+            </div>
+        </div>
+    `;
+    postsContainer.insertAdjacentHTML('beforeend', postHtml)
+  });
 }
 
 function handleSignup(event) {
@@ -156,9 +178,10 @@ function getFirstParagraph(htmlContent) {
 }
 
 function extractPostInfo(content) {
-  const lines = content.split('\n'); // Split the content into lines
-  const title = lines[0].replace('# ', ''); // Assume the first line is the title
-  const markdownContent = lines.slice(1).join('\n'); // The rest is the content
+  const lines = content.split('\n');
+  const title = lines[0].replace('# ', '');
+  const markdownContent = lines.slice(1).join('\n');
+  const username = localStorage.getItem('username');
 
   // Store the title in local storage or wherever needed
   localStorage.setItem('currentPostTitle', title);
@@ -169,6 +192,8 @@ function extractPostInfo(content) {
   const firstParagraph = getFirstParagraph(htmlContent)
   return {
     title,
+    author: username || "Joe Doe",
+    date: Date().toString(),
     firstParagraph,
     htmlContent
   }
@@ -190,7 +215,7 @@ async function cachePostsToLocal() {
     console.log(postDetail)
 
     // Store each post's content by ID in local storage
-    localStorage.setItem(postId, postDetail);
+    localStorage.setItem(postId, JSON.stringify(postDetail));
 
     // Store each post ID in the allPosts array
     allPosts.push(postId);
