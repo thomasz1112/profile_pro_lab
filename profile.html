@@ -8,7 +8,7 @@
   <link href="https://cdn.muicss.com/mui-0.10.3/css/mui.min.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.muicss.com/mui-0.10.3/js/mui.min.js"></script>
   <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js"></script>
   <title>ProfileProLab</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -68,12 +68,12 @@
   </header>
   <div id="content-wrapper">
     <div class="mui--appbar-height"></div>
-    <div class="mui-container-fluid">
+    <div class="mui-container-fluid main-container">
       <br>
       <div class="profile-container">
         <img src="images/johodoe.webp" alt="User Avatar" class="avatar">
         <div class="profile-info">
-          <h1 id="username">John Doe</h1>
+          <h1 id="username" class="username">John Doe</h1>
           <h2>Web Developer</h2>
           <p>Passionate web developer with a knack for building responsive, user-centric applications. Lover of
             technology and open-source contributor.</p>
@@ -81,6 +81,53 @@
             <a href="https://github.com/yourusername" target="_blank">GitHub</a>
             <a href="https://twitter.com/yourusername" target="_blank">Twitter</a>
             <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+      <div class="mui-row">
+        <div class="mui-col-sm-10 mui-col-sm-offset-1">
+          <br>
+          <br>
+          <div class="mui--text-dark-secondary mui--text-body2">PINNED POST</div>
+          <div class="mui-divider"></div>
+          <br>
+          <div class="mui--text-headline">Unite for Freedom: The Global Battle Against Tyranny</div>
+          <div class="mui--text-dark-secondary">By <a class="username" href="#">John Doe</a> 3 days ago</div>
+          <div>
+            "Freedom is never voluntarily given by the oppressor; it must be demanded by the oppressed." — Martin Luther
+            King Jr. This powerful statement encapsulates the universal battle for freedom, a cherished state that fuels
+            our dreams and aspirations. Across the globe, from bustling metropolises to serene villages, the desire for
+            freedom binds us all, guiding our collective and individual paths. This blog post explores the intrinsic
+            human need for freedom, the love that blossoms in its presence, and the dark shadows cast by dictatorships
+            that strive to suppress it. As we journey through these themes, let's inspire each other to stand united in
+            the fight for what fuels the human spirit: freedom.
+            <a href="#">Read more...</a>
+          </div>
+          <br>
+          <br>
+          <div class="mui--text-dark-secondary mui--text-body2">RECENT POSTS</div>
+          <div class="mui-divider"></div>
+          <br>
+          <div class="mui--text-headline">MUI Acquires New Features</div>
+          <div class="mui--text-dark-secondary">By <a href="#">Team MUI</a> 3 days ago</div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
+            aliquam ipsum sed dignissim. Sed ac accumsan odio. Vivamus tristique
+            dignissim neque. Interdum et malesuada fames ac ante ipsum primis in
+            faucibus. Nunc cursus felis nec purus condimentum vestibulum. Donec mauris
+            nisi, sollicitudin eget iaculis id, suscipit id odio.
+            <a href="#">Read more...</a>
+          </div>
+          <br>
+          <div class="mui--text-headline">MUI Acquires New Features</div>
+          <div class="mui--text-dark-secondary">By <a href="#">Team MUI</a> 3 days ago</div>
+          <div>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis
+            aliquam ipsum sed dignissim. Sed ac accumsan odio. Vivamus tristique
+            dignissim neque. Interdum et malesuada fames ac ante ipsum primis in
+            faucibus. Nunc cursus felis nec purus condimentum vestibulum. Donec mauris
+            nisi, sollicitudin eget iaculis id, suscipit id odio.
+            <a href="#">Read more...</a>
           </div>
         </div>
       </div>

@@ -62,13 +62,17 @@ function getHtmlFileName() {
 }
 
 window.onload = function () {
-  const username = localStorage.getItem('username')
-  if (username && ['signin.html', 'signup.html'].includes(getHtmlFileName())) {
+  const username = localStorage.getItem('username');
+  const currentPage = getHtmlFileName();
+  if (username && ['signin.html', 'signup.html'].includes(currentPage)) {
     window.location.href = 'profile.html';
   }
 
   if (username) {
-    document.getElementById('username').textContent = username;
+    const usernameElements = document.querySelectorAll('.username'); // Select all elements with the class 'username'
+    usernameElements.forEach(function (element) {
+      element.textContent = username; // Set the text content of each element to the username
+    });
   }
 
   var signinFormElem = document.getElementById('signinForm');
@@ -126,4 +130,73 @@ window.onload = function () {
       window.location.href = 'signin.html';
     });
   }
+
+  if (currentPage == 'profile.html') {
+    cachePostsToLocal()
+  }
 };
+
+function trimContentByCharacter(content, maxLength) {
+  return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
+}
+
+function getFirstParagraph(htmlContent) {
+  // Create a new DOMParser instance
+  const parser = new DOMParser();
+  // Parse the HTML content into a document
+  const doc = parser.parseFromString(htmlContent, 'text/html');
+
+  // Find the first <p> element and return its innerHTML
+  const firstParagraph = doc.querySelector('p');
+  return firstParagraph ? firstParagraph.innerHTML : '';
+}
+
+function extractPostInfo(content) {
+  const lines = content.split('\n'); // Split the content into lines
+  const title = lines[0].replace('# ', ''); // Assume the first line is the title
+  const markdownContent = lines.slice(1).join('\n'); // The rest is the content
+
+  // Store the title in local storage or wherever needed
+  localStorage.setItem('currentPostTitle', title);
+
+  // Use Showdown to convert Markdown to HTML
+  const converter = new showdown.Converter();
+  const htmlContent = converter.makeHtml(markdownContent);
+  const firstParagraph = getFirstParagraph(htmlContent)
+  return {
+    title,
+    firstParagraph,
+    htmlContent
+  }
+}
+
+async function cachePostsToLocal() {
+  console.log("shit")
+  const numberOfPosts = 6;
+  let allPosts = [];
+  let newestPosts = [];
+  let pinnedPosts = ['post_1.txt']; // Example pinned posts, manage as needed
+
+  for (let i = 1; i <= numberOfPosts; i++) {
+    const postId = `post_${String(i)}.txt`; // Ensures correct file name
+
+    const postData = await fetch(`./posts/${postId}`).then(response => response.text());
+
+    const postDetail = extractPostInfo(postData)
+    console.log(postDetail)
+
+    // Store each post's content by ID in local storage
+    localStorage.setItem(postId, postDetail);
+
+    // Store each post ID in the allPosts array
+    allPosts.push(postId);
+
+    // Assume the newest posts are the last three added (for example)
+    if (i > numberOfPosts - 3) newestPosts.push(postId);
+  }
+
+  // Store lists in local storage
+  localStorage.setItem('allPosts', JSON.stringify(allPosts));
+  localStorage.setItem('newestPosts', JSON.stringify(newestPosts));
+  localStorage.setItem('pinnedPosts', JSON.stringify(pinnedPosts));
+}

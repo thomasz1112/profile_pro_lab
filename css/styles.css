@@ -197,6 +197,11 @@ body {
   text-decoration: none;
 }
 
+.main-container {
+  background-color: var(--primary-background-color);
+  padding-bottom: 5em;
+}
+
 .profile-container {
   display: flex;
   flex-direction: column;
