@@ -55,12 +55,6 @@ jQuery(function ($) {
   });
 });
 
-function getHtmlFileName() {
-  var path = window.location.pathname; // Gets the path
-  var fileName = path.substring(path.lastIndexOf('/') + 1); // Extracts file name from the path
-  return fileName;
-}
-
 window.onload = function () {
   const username = localStorage.getItem('username');
   const currentPage = getHtmlFileName();
@@ -69,72 +63,82 @@ window.onload = function () {
   }
 
   if (username) {
-    const usernameElements = document.querySelectorAll('.username'); // Select all elements with the class 'username'
+    const usernameElements = document.querySelectorAll('.username');
     usernameElements.forEach(function (element) {
-      element.textContent = username; // Set the text content of each element to the username
+      element.textContent = username;
     });
   }
 
   var signinFormElem = document.getElementById('signinForm');
   if (signinFormElem) {
-    signinFormElem.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const hashedPassword = btoa(password); // Same simple "encryption" for demonstration
-
-      let users = JSON.parse(localStorage.getItem('users')) || {};
-
-      if (users[username] && users[username] === hashedPassword) {
-        localStorage.setItem('username', username);
-        alert('You are successfully signed in!');
-        // Redirect to a new page or update UI
-        window.location.href = 'profile.html';
-      } else {
-        alert('Invalid username or password.');
-      }
-    });
+    signinFormElem.addEventListener('submit', handleSignup);
   }
   var signupFormElem = document.getElementById('signupForm');
   if (signupFormElem) {
-    signupFormElem.addEventListener('submit', function (event) {
-      event.preventDefault(); // Prevent the default form submission behavior
-
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const passwordConfirm = document.getElementById('password-confirm').value;
-
-      if (password !== passwordConfirm) {
-        alert('Passwords do not match. Please try again.');
-        return;
-      }
-
-      // Assume some basic encryption or hashing (not actually secure, just for demonstration)
-      const hashedPassword = btoa(password); // Using Base64 just for the example
-
-      // Check if users data already exists
-      let users = JSON.parse(localStorage.getItem('users')) || {};
-      if (users[username]) {
-        alert('Username already exists. Please use a different username.');
-        return;
-      }
-
-      // Save new user data
-      users[username] = hashedPassword;
-      localStorage.setItem('users', JSON.stringify(users));
-
-      alert('You have successfully signed up!');
-      // Redirect or clear form
-      this.reset();
-      window.location.href = 'signin.html';
-    });
+    signupFormElem.addEventListener('submit', handleSignin);
   }
 
   if (currentPage == 'profile.html') {
     cachePostsToLocal()
   }
 };
+
+function getHtmlFileName() {
+  var path = window.location.pathname; // Gets the path
+  var fileName = path.substring(path.lastIndexOf('/') + 1); // Extracts file name from the path
+  return fileName;
+}
+
+function handleSignup(event) {
+  event.preventDefault();
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const hashedPassword = btoa(password); // Same simple "encryption" for demonstration
+
+  let users = JSON.parse(localStorage.getItem('users')) || {};
+
+  if (users[username] && users[username] === hashedPassword) {
+    localStorage.setItem('username', username);
+    alert('You are successfully signed in!');
+    // Redirect to a new page or update UI
+    window.location.href = 'profile.html';
+  } else {
+    alert('Invalid username or password.');
+  }
+}
+
+function handleSignin(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const passwordConfirm = document.getElementById('password-confirm').value;
+
+  if (password !== passwordConfirm) {
+    alert('Passwords do not match. Please try again.');
+    return;
+  }
+
+  // Assume some basic encryption or hashing (not actually secure, just for demonstration)
+  const hashedPassword = btoa(password); // Using Base64 just for the example
+
+  // Check if users data already exists
+  let users = JSON.parse(localStorage.getItem('users')) || {};
+  if (users[username]) {
+    alert('Username already exists. Please use a different username.');
+    return;
+  }
+
+  // Save new user data
+  users[username] = hashedPassword;
+  localStorage.setItem('users', JSON.stringify(users));
+
+  alert('You have successfully signed up!');
+  // Redirect or clear form
+  this.reset();
+  window.location.href = 'signin.html';
+}
 
 function trimContentByCharacter(content, maxLength) {
   return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
