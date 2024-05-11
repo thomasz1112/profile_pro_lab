@@ -87,6 +87,11 @@ window.onload = async function () {
   if (currentPage == 'post_detail.html') {
     showPostDetail();
   }
+
+  if (currentPage == 'posts.html') {
+    const allPostIds = JSON.parse(localStorage.getItem('allPosts'));
+    appendPosts(allPostIds, 'all-posts');
+  }
 };
 
 function showPostDetail() {
