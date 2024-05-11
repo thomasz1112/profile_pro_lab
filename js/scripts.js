@@ -92,6 +92,22 @@ window.onload = async function () {
     const allPostIds = JSON.parse(localStorage.getItem('allPosts'));
     appendPosts(allPostIds, 'all-posts');
   }
+
+  if (currentPage == 'gallery.html') {
+    document.querySelectorAll('.gallery-img').forEach(img => {
+      img.addEventListener('click', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = img.src; // Set the src for lightbox image
+        lightbox.style.display = 'flex'; // Show the lightbox
+      });
+    });
+
+    document.getElementById('lightbox').addEventListener('click', () => {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.style.display = 'none'; // Hide the lightbox on click
+    });
+  }
 };
 
 function showPostDetail() {
